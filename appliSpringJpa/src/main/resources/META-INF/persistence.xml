@@ -9,6 +9,9 @@
 		<!-- on précise ici la technologie choisie pour coder/implementer JPA Hibernate 
 			(ou OpenJpa ou EclipseLink) -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<!-- indiquer liste des classes avec @Entity (facultatif) -->
+       <class>com.m2i.tp.appliSpringJpa.entity.Employe</class>
 
 		<!-- configurer d'une façon ou d'une autre une connexion à la base de données -->
 		<!-- aujourd'hui via des propriétés spécifiques Hibernate -->
