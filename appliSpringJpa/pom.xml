@@ -18,12 +18,12 @@
 		<!-- sous eclipse , windows preferences general workspace text encoding utf8 -->
 	</properties>
 	<dependencies>
-	   <!-- 
+	   
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		-->
+		
 		<!-- NB: hibernate-core et jakarta-persistence-api sont des dépendances indirectes
 		de spring-boot-starter-data-jpa -->
 
