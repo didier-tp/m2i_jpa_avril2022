@@ -5,6 +5,11 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="appliSpringJpa"
 		transaction-type="RESOURCE_LOCAL">
+		
+		
+     <!--  ATTENTION : ce fichier n'est utile qu'en version JPA/Hibernate sans springBoot 
+                        avec springBoot , la configuration doit être placée 
+                        dans application.properties -->		
 
 		<!-- on précise ici la technologie choisie pour coder/implementer JPA Hibernate 
 			(ou OpenJpa ou EclipseLink) -->
