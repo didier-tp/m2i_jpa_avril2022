@@ -1,5 +1,12 @@
 package com.m2i.tp.appliSpringJpa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /*
  CREATE TABLE employe(
@@ -12,14 +19,33 @@ package com.m2i.tp.appliSpringJpa.entity;
 	password VARCHAR(64),
 	PRIMARY KEY(EMP_ID));
  */
+
+@Entity
+@Table(name = "employe")
 public class Employe {
 	
+	@Id
+	@Column(name = "EMP_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer empId;
+	
 	private String firstname;
+	
 	private String lastname;
+	
+	/*
+	@Transient
+	private String nomComplet; //si existe en java mais pas en tant que colonne
+	*/
+	
+	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
+	
 	private String email;
+	
+	@Column(name = "LOGIN")
 	private String login;
+	
 	private String password;
 	
 
