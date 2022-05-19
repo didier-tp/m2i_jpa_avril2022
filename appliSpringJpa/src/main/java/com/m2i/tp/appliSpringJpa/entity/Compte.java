@@ -1,5 +1,6 @@
 package com.m2i.tp.appliSpringJpa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,10 +10,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name="compte")
 public class Compte {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer numero;
+	
+	@Column(name="label" , length = 64) // label VARCHAR(64)
 	private String label;
+	
 	private Double solde;
 	
 	
