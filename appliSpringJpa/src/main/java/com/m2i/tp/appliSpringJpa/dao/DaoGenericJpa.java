@@ -8,8 +8,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.m2i.tp.appliSpringJpa.entity.Compte;
-
 
 /*
 * Cette version du DAO sera utilisé par Spring+JPA
@@ -24,7 +22,7 @@ import com.m2i.tp.appliSpringJpa.entity.Compte;
 * 
 */
 @Repository //cas particulier de @Component //pour prise en charge par framework spring
-@Transactional //pour commit/rollback automatique
+//@Transactional //pour commit/rollback automatique (ici ou au cas par cas sur méthodes)
 public class DaoGenericJpa<T,ID> implements DaoGeneric<T,ID> {
 	
 	//NB: @PersistenceContext permet d'initialiser l'objet technique
@@ -49,12 +47,14 @@ public class DaoGenericJpa<T,ID> implements DaoGeneric<T,ID> {
 	}
 
 	@Override
+	@Transactional
 	public T insert(T e) {
 			entityManager.persist(e); //INSERT INTO SQL avec aut_incr
 		return e;
 	}
 
 	@Override
+	@Transactional
 	public void update(T e) {
 		    //via le @Transactional placé au dessus de la classe du dao
 		    //il y a ici un entityManager.getTransaction().begin() automatiquement déclenché
@@ -67,6 +67,7 @@ public class DaoGenericJpa<T,ID> implements DaoGeneric<T,ID> {
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(ID id) {
 			T entiteAsupprimer = entityManager.find(entityClass, id);
 			entityManager.remove(entiteAsupprimer);

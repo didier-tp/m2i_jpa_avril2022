@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /*
  CREATE TABLE employe(
@@ -29,25 +31,23 @@ public class Employe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer empId;
 	
+	@NotNull(message = "firstname cannot be null")
 	private String firstname;
-	
+	   
+	@NotNull(message = "lastname cannot be null")
 	private String lastname;
-	
-	/*
-	@Transient
-	private String nomComplet; //si existe en java mais pas en tant que colonne
-	*/
-	
-	@Column(name = "PHONE_NUMBER")
+	   
+	@Column(name="PHONE_NUMBER") //attention piège (avec MySql sous linux , il y a différence entre minuscule/majuscule sur nom de colonne , mais pas sous windows)
 	private String phoneNumber;
-	
-	private String email;
-	
-	@Column(name = "LOGIN")
-	private String login;
-	
-	private String password;
-	
+	   
+	@Email(message = "email should be valid")
+	 private String email;
+
+	 @Column(name="LOGIN",length = 32) //pour VARCHAR(32) si table créée automatiquement
+	 private String login;
+	   
+	 @Size(min = 3, max = 32, message = "password length must be between 3 and 32 characters")
+	 private String password;
 
 	
 	public Employe() {
