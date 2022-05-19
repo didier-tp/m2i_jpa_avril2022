@@ -1,12 +1,15 @@
 package com.m2i.tp.appliSpringJpa.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,9 +26,16 @@ public class Compte {
 	private Double solde;
 	
 	//1-n (fetch = FetchType.EAGER , mappedBy="nom java de la relation inverse")
-	//private List<Operation> operations;
+	@OneToMany(fetch = FetchType.EAGER , mappedBy="compte")
+	private List<Operation> operations;
 	
-	
+	public void addOperation(Operation op) {
+		if(this.operations==null) {
+			this.operations = new ArrayList<Operation>();
+		}
+		op.setCompte(this);
+		this.operations.add(op);
+	}
 	
 	@Override
 	public String toString() {
@@ -60,6 +70,14 @@ public class Compte {
 	}
 	public void setSolde(Double solde) {
 		this.solde = solde;
+	}
+
+	public List<Operation> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(List<Operation> operations) {
+		this.operations = operations;
 	}
 	
 	

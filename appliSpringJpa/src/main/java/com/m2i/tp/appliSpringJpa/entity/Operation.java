@@ -2,11 +2,26 @@ package com.m2i.tp.appliSpringJpa.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
+@Table(name="operation")
 public class Operation {
+	
+	@Id
+	@Column(name="num_op")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer numOp;
+	
     private String label;
     private Double montant;
    
@@ -14,10 +29,21 @@ public class Operation {
     private Date dateOp; //"2022-05-19"
     
     //n-1 et foreign key "numero_compte"
+    @ManyToOne()
+    @JoinColumn(name="numero_compte")
     private Compte compte;
 
     
     
+	@Override
+	public String toString() {
+		/*return "Operation [numOp=" + numOp + ", label=" + label + ", montant=" + montant + ", dateOp=" + dateOp
+				+ ", compte=" + compte + "]"; */
+		return "Operation [numOp=" + numOp + ", label=" + label + ", montant=" + montant + ", dateOp=" + dateOp + "]";
+	}
+
+
+
 	public Operation() {
 		super();
 	}
@@ -41,6 +67,66 @@ public class Operation {
 		this.label = label;
 		this.montant = montant;
 		this.dateOp = dateOp;
+	}
+
+
+
+	public Integer getNumOp() {
+		return numOp;
+	}
+
+
+
+	public void setNumOp(Integer numOp) {
+		this.numOp = numOp;
+	}
+
+
+
+	public String getLabel() {
+		return label;
+	}
+
+
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+
+
+	public Double getMontant() {
+		return montant;
+	}
+
+
+
+	public void setMontant(Double montant) {
+		this.montant = montant;
+	}
+
+
+
+	public Date getDateOp() {
+		return dateOp;
+	}
+
+
+
+	public void setDateOp(Date dateOp) {
+		this.dateOp = dateOp;
+	}
+
+
+
+	public Compte getCompte() {
+		return compte;
+	}
+
+
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
 	}
 	
 	

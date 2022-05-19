@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.m2i.tp.appliSpringJpa.dao.DaoCompte;
+import com.m2i.tp.appliSpringJpa.dao.DaoOperation;
 import com.m2i.tp.appliSpringJpa.entity.Compte;
 import com.m2i.tp.appliSpringJpa.entity.Operation;
 
@@ -24,22 +25,34 @@ class TestDaoCompte {
 	
 	@Test
 	void testCompteAvecOperations() {
-		Compte compteX = new Compte(null, "compteX", 120.0);
-		Compte compteXStockeEnBase = daoCompte.insert(compteX);
+		Compte compteXStockeEnBase = daoCompte.insert(new Compte(null, "compteX", 120.0));
 		System.out.println("compteXStockeEnBase"+compteXStockeEnBase.toString());
-		Integer idCpt = compteXStockeEnBase.getNumero();
+		Integer idCptX = compteXStockeEnBase.getNumero();
 		
-		Operation op1 = new Operation(null, "achat zz", -55.0 , new Date() , compteXStockeEnBase );
-		Operation op2 = new Operation(null, "achat 2", -75.0 , new Date() , compteXStockeEnBase );
-		Operation op3 = new Operation(null, "achat zz", -35.0 , new Date() , compteXStockeEnBase );
-		Operation op2StockeeEnBase = daoOperation.insert(op1); //3 fois
+		Operation op1xStockeeEnBase = daoOperation.insert(new Operation(null, "achat 1x", -55.0 , new Date() , compteXStockeEnBase )); 
+		Operation op2xStockeeEnBase = daoOperation.insert(new Operation(null, "achat 2x", -75.0 , new Date() , compteXStockeEnBase )); 
+		Operation op3xStockeeEnBase = daoOperation.insert(new Operation(null, "achat 3x", -35.0 , new Date() , compteXStockeEnBase ));
 		
-		Operation op1Relu = daoOperation.findById(op2StockeeEnBase.getNumOp());
-		//affiche op1Relu.getCompte().getSolde()
+		Compte compteYStockeEnBase = daoCompte.insert(new Compte(null, "compteY", 330.0));
+		System.out.println("compteYStockeEnBase"+compteYStockeEnBase.toString());
+		Integer idCptY = compteYStockeEnBase.getNumero();
+		
+		Operation op1yStockeeEnBase = daoOperation.insert(new Operation(null, "achat 1y", -65.0 , new Date() , compteYStockeEnBase )); 
+		Operation op2yStockeeEnBase = daoOperation.insert(new Operation(null, "achat 2y", -85.0 , new Date() , compteYStockeEnBase ));
+		
+		Operation op2xRelu = daoOperation.findById(op2xStockeeEnBase.getNumOp());
+		System.out.println("solde du compte attaché à op2xStockeeEnBase : " + op2xRelu.getCompte().getSolde());
+		
+		Operation op2yRelu = daoOperation.findById(op2yStockeeEnBase.getNumOp());
+		System.out.println("solde du compte attaché à op2yStockeeEnBase : " + op2yRelu.getCompte().getSolde());
 		
 		//etape2
 		//on charge le compte et on affiche les operations liées aux compte
+		Compte compteXRelu = daoCompte.findById(idCptX);
+		System.out.println("operations attachées au compteX: " + compteXRelu.getOperations());
 		
+		Compte compteYRelu = daoCompte.findById(idCptY);
+		System.out.println("operations attachées au compteY: " + compteYRelu.getOperations());
 	}
 
 	@Test

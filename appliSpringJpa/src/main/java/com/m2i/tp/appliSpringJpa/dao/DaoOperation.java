@@ -1,6 +1,6 @@
 package com.m2i.tp.appliSpringJpa.dao;
 
-import com.m2i.tp.appliSpringJpa.entity.Compte;
+import com.m2i.tp.appliSpringJpa.entity.Operation;
 
 /*
  DAO : Data Access Object (objet de traitement spécialisé dans l'accès aux données en base)
@@ -8,8 +8,8 @@ import com.m2i.tp.appliSpringJpa.entity.Compte;
  avec throws RuntimeException implicite
  */
 
-public interface DaoCompte extends DaoGeneric<Compte,Integer>{
-	//+ méthode de recherche spécifiques aux operations
+public interface DaoOperation extends DaoGeneric<Operation,Integer>{
+	//+ méthode de recherche spécifiques aux comptes
 }
 
 
