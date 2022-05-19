@@ -17,7 +17,7 @@ class TestDaoCompte {
 	@Test
 	void testAjoutEtRecuperation() {
 		Compte compteA = new Compte(null, "compteA", 120.0);
-		Compte compteAStockeEnBase = daoCompte.insertCompte(compteA);
+		Compte compteAStockeEnBase = daoCompte.insert(compteA);
 		System.out.println("compteAStockeEnBase"+compteAStockeEnBase.toString());
 	}
 

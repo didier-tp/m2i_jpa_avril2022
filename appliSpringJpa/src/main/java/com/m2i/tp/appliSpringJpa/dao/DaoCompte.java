@@ -10,14 +10,21 @@ import com.m2i.tp.appliSpringJpa.entity.Compte;
  avec throws RuntimeException implicite
  */
 
+public interface DaoCompte extends DaoGeneric<Compte,Integer>{
+	//+ méthode de recherche spécifiques aux comptes
+}
+
+/*
+V1 (sans astuce)
 public interface DaoCompte {
       public Compte findById(Integer id);
       public List<Compte> findAll();
       //....
-      public Compte insertCompte(Compte c);
+      public Compte insert(Compte c);
       
-      public void updateCompte(Compte c); // update / mise à jour des valeurs en base
+      public void update(Compte c); // update / mise à jour des valeurs en base
       
       public void deleteById(Integer id);
       
 }
+*/

@@ -19,7 +19,7 @@ class TestDaoEmploye {
 	@Test
 	void testAjoutEtRecuperation() {
 		Employe emp1 = new Employe(null, "prenom1", "Nom", "0102030405", "jean.Bon@xyz.com", "login", "pwd");
-		Employe empl1StockeEnBase = daoEmploye.insertEmploye(emp1);
+		Employe empl1StockeEnBase = daoEmploye.insert(emp1);
 		System.out.println("empl1StockeEnBase"+empl1StockeEnBase.toString());
 	}
 

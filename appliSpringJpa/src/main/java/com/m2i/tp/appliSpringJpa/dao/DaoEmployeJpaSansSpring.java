@@ -34,7 +34,7 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye {
 	}
 
 	@Override
-	public Employe insertEmploye(Employe emp) {
+	public Employe insert(Employe emp) {
 		try {
 			entityManager.getTransaction().begin();
 			//en entrée , emp est un nouvel objet employé avec .empId à null (encore inconnu)
@@ -50,7 +50,7 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye {
 	}
 
 	@Override
-	public void updateEmploye(Employe emp) {
+	public void update(Employe emp) {
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.merge(emp); //UPDATE SQL

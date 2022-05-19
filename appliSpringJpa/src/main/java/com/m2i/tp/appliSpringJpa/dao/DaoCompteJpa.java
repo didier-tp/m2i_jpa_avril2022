@@ -47,13 +47,13 @@ public class DaoCompteJpa implements DaoCompte {
 	}
 
 	@Override
-	public Compte insertCompte(Compte c) {
+	public Compte insert(Compte c) {
 			entityManager.persist(c); //INSERT INTO SQL avec aut_incr
 		return c;
 	}
 
 	@Override
-	public void updateCompte(Compte c) {
+	public void update(Compte c) {
 			entityManager.merge(c); //UPDATE SQL
 	}
 

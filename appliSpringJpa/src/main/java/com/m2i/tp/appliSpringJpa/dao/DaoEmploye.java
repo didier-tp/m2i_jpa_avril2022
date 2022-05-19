@@ -9,16 +9,22 @@ import com.m2i.tp.appliSpringJpa.entity.Employe;
  comporte des méthodes CRUD (Create/Insert , Rechercher , Update , Delete)
  avec throws RuntimeException implicite
  */
+public interface DaoEmploye extends DaoGeneric<Employe,Integer>{
+	//...
+}
 
+/*
+V1 sans astuce:
 public interface DaoEmploye {
       public Employe findById(Integer id);
       public List<Employe> findAll();
       //....
-      public Employe insertEmploye(Employe emp);//en entrée : objet pas encore stocké en base avec idEmp=null
+      public Employe insert(Employe emp);//en entrée : objet pas encore stocké en base avec idEmp=null
                                                 //en retour : objet avec .idEmp auto-incrémenté
       
-      public void updateEmploye(Employe emp); // update / mise à jour des valeurs en base
+      public void update(Employe emp); // update / mise à jour des valeurs en base
       
       public void deleteById(Integer id);
       
 }
+*/

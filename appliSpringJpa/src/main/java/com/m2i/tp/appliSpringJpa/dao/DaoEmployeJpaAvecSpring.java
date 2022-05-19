@@ -47,7 +47,7 @@ public class DaoEmployeJpaAvecSpring implements DaoEmploye {
 	}
 
 	@Override
-	public Employe insertEmploye(Employe emp) {
+	public Employe insert(Employe emp) {
 			//en entrée , emp est un nouvel objet employé avec .empId à null (encore inconnu)
 			//déclenche automatiquement INSERT INTO Employe(firstname, ....) VALUES(emp.getFirstname() , ....)
 			entityManager.persist(emp); //INSERT INTO SQL avec aut_incr
@@ -55,7 +55,7 @@ public class DaoEmployeJpaAvecSpring implements DaoEmploye {
 	}
 
 	@Override
-	public void updateEmploye(Employe emp) {
+	public void update(Employe emp) {
 			entityManager.merge(emp); //UPDATE SQL
 	}
 
