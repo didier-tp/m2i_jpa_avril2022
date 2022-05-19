@@ -1,5 +1,7 @@
 package com.m2i.tp.appliSpringJpa.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,9 @@ public class Compte {
 	private String label;
 	
 	private Double solde;
+	
+	//1-n (fetch = FetchType.EAGER , mappedBy="nom java de la relation inverse")
+	//private List<Operation> operations;
 	
 	
 	
