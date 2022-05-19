@@ -12,7 +12,7 @@ class TestDaoEmploye {
 	
 	//initialise daoEmploye pour que ça référence un composant pris en charge
 	//par Spring et qui est compatible avec l'interface DaoEmploye
-	//dans ce projet , seule la classe DaoEmployeJpa correspond à ce critère
+	//dans ce projet , seule la classe DaoEmployeJpaAvecSpring correspond à ce critère
 	@Autowired //injection de dépendance via Spring
 	private DaoEmploye daoEmploye;
 
