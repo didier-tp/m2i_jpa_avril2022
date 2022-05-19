@@ -35,8 +35,8 @@ class TestServiceCompte {
 		
 		Compte compteBReluApresVirement = daoCompte.findById(idCptB);
 		Compte compteCReluApresVirement = daoCompte.findById(idCptC);
-		System.out.println("compteBReluApresVirement="+compteBReluApresVirement);
-		System.out.println("compteCReluApresVirement="+compteCReluApresVirement);
+		System.out.println("compteBReluApresVirement="+compteBReluApresVirement); //120 -10 : 110
+		System.out.println("compteCReluApresVirement="+compteCReluApresVirement); //200 +10 : 210
 		//+Assertions
 	}
 

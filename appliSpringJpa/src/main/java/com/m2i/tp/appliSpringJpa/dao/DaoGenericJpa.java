@@ -56,7 +56,14 @@ public class DaoGenericJpa<T,ID> implements DaoGeneric<T,ID> {
 
 	@Override
 	public void update(T e) {
+		    //via le @Transactional placé au dessus de la classe du dao
+		    //il y a ici un entityManager.getTransaction().begin() automatiquement déclenché
+		    //si un service ne l'a pas déjà fait sinon le dao utilise la transaction déjà créée.
 			entityManager.merge(e); //UPDATE SQL
+			//via le @Transactional placé au dessus de cette classe de dao
+		    //il y a ici un entityManager.getTransaction().commit() ou .rollback() automatiquement déclenché
+			//si c'est le dao qui a commencé la transaction. 
+			//c'est le service métier appelant qui fait de commit ou rollback dans le cas contraire 
 	}
 
 	@Override

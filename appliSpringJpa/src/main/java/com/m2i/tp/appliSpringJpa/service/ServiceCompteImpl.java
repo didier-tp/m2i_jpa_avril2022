@@ -18,11 +18,11 @@ public class ServiceCompteImpl implements ServiceCompte {
 	public void virement(double montant, Integer numCptDeb, Integer numCptCred) throws RuntimeException {
 		Compte compteAdebiter = daoCompte.findById(numCptDeb);
 		compteAdebiter.setSolde(compteAdebiter.getSolde() - montant);
-		daoCompte.update(compteAdebiter);
+		//daoCompte.update(compteAdebiter); //update/merge automatique à l'état persistant
 		
 		Compte compteAcrediter = daoCompte.findById(numCptCred);
 		compteAcrediter.setSolde(compteAcrediter.getSolde() + montant);
-		daoCompte.update(compteAcrediter);
+		//daoCompte.update(compteAcrediter);//update/merge automatique à l'état persistant
 	}
 
 }
