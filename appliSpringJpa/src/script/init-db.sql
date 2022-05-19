@@ -42,9 +42,10 @@ INSERT INTO compte (numero,label,solde) VALUES (1,'compte 1', 50.0);
 INSERT INTO compte (numero,label,solde) VALUES (2,'compte 2', 150.0);
 
 INSERT INTO operation (num_op,label,montant,date_op,numero_compte) VALUES (1,'achat 1 sur compte 1', -4.5 , '2022-02-25',1);
-INSERT INTO operation (num_op,label,montant,date_op,numero_compte) VALUES (2,'achat 2 sur compte 1', -4.5 , '2022-03-22' , 1);
-INSERT INTO operation (num_op,label,montant,date_op,numero_compte) VALUES (1,'achat 1 sur compte 2', -4.5 , '2022-01-20',2);
-
+INSERT INTO operation (num_op,label,montant,date_op,numero_compte) VALUES (2,'achat 2 sur compte 1', -3.5 , '2022-03-22' , 1);
+INSERT INTO operation (num_op,label,montant,date_op,numero_compte) VALUES (3,'achat 1 sur compte 2', -1.5 , '2022-01-20',2);
+INSERT INTO operation (num_op,label,montant,date_op,numero_compte) VALUES (4,'achat 2 sur compte 2', -1.2 , '2022-01-21',2);
 
 SELECT * FROM employe;
 SELECT * FROM compte;
+SELECT * FROM operation;
