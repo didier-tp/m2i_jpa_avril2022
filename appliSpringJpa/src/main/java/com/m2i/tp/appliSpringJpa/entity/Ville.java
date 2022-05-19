@@ -42,7 +42,7 @@ public class Ville implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ville " + super.toString() + "  [id=" + id + ", nom=" + nom + ", population=" + population + "]";
+		return "Ville " /*+ super.toString() */ + "  [id=" + id + ", nom=" + nom + ", population=" + population + "]";
 	}
 
 	public Integer getId() {

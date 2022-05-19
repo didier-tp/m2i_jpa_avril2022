@@ -16,36 +16,41 @@ class TestDaoVilleAvecCache {
 	@Autowired //injection de dépendance via Spring
 	private DaoVille daoVille;
 	
-    void preparerQuelquesVilles() {
+	int  preparerQuelquesVilles() {
+    	int firstId = 0;
     	//valeurs stables évoluant rarement
-    	daoVille.insert(new Ville(null,"Paris" , 2206488));
+    	firstId = daoVille.insert(new Ville(null,"Paris" , 2206488)).getId();
     	daoVille.insert(new Ville(null,"Marseille" , 861535));
     	daoVille.insert(new Ville(null,"Lyon" , 513275));
     	daoVille.insert(new Ville(null,"Toulouse" , 471941));
     	daoVille.insert(new Ville(null,"Nantes" , 303382));
+    	return firstId;
 	}
 	
 
 	@Test
 	void testVilleAvecCache() {
 		//premier(s) appel(s) (avec remplissage de cache)
-		preparerQuelquesVilles();
-		recupererQuelquesVilles();
+		int firstId = preparerQuelquesVilles();
+		recupererQuelquesVilles(firstId);
 		
 		//autres(s) appel(s) (avec utilisation du cache sans nouveaux select en base)
-		recupererQuelquesVilles();
-		recupererQuelquesVilles(); //ici à la suite
-		recupererQuelquesVilles(); //dans vrai projet (appels déclenchés par utilisateurs différents)
+		recupererQuelquesVilles(firstId);
+		recupererQuelquesVilles(firstId); //ici à la suite
+		recupererQuelquesVilles(firstId); //dans vrai projet (appels déclenchés par utilisateurs différents)
 		
-		/*BUG à elucider : o.h.c.s.support.AbstractReadWriteAccess  : 
+		/*BUG si appel à findAll() car besoin de paramétrer cache sur query
+		 * 
+		 *  : o.h.c.s.support.AbstractReadWriteAccess  : 
 		 * Cache put-from-load [region=`AccessType[read-write]` 
 		 * (com.m2i.tp.appliSpringJpa.entity.Ville), key=`com.m2i.tp.appliSpringJpa.entity.Ville#2`,
 		 *  value=`CacheEntry(com.m2i.tp.appliSpringJpa.entity.Ville)`] failed due to being non-writable
 		 */
 	}
 	
-	void recupererQuelquesVilles() {
-		System.out.println("villes="+ daoVille.findAll());
+	void recupererQuelquesVilles(int firstId) {
+		System.out.println("ville_1="+ daoVille.findById(firstId));
+		System.out.println("ville_2="+ daoVille.findById(firstId+1));
 	}
 	
 	
