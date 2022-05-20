@@ -9,11 +9,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="compte")
+@NamedQueries({
+   @NamedQuery(name = "Compte.findBySoldeMaxi",query = "SELECT c FROM  Compte c WHERE c.solde < ?1 ")
+})
 public class Compte {
 	
 	@Id
@@ -25,7 +30,7 @@ public class Compte {
 	
 	private Double solde;
 	
-	//1-n (fetch = FetchType.EAGER , mappedBy="nom java de la relation inverse")
+	//1-n (fetch = FetchType.EAGER déconseillé ou LAZY conseilllé , mappedBy="nom java de la relation inverse")
 	@OneToMany(fetch = FetchType.EAGER , mappedBy="compte")
 	private List<Operation> operations;
 	

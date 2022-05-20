@@ -53,6 +53,9 @@ class TestDaoCompte {
 		
 		Compte compteYRelu = daoCompte.findById(idCptY);
 		System.out.println("operations attachées au compteY: " + compteYRelu.getOperations());
+		
+		List<Compte> compteAvecPetitsSoldes = daoCompte.findBySoldeMaxi(200.0);
+		System.out.println("compteAvecPetitsSoldes="+compteAvecPetitsSoldes);
 	}
 
 	@Test

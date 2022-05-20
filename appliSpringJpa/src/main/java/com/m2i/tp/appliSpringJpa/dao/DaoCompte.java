@@ -1,5 +1,7 @@
 package com.m2i.tp.appliSpringJpa.dao;
 
+import java.util.List;
+
 import com.m2i.tp.appliSpringJpa.entity.Compte;
 
 /*
@@ -9,7 +11,8 @@ import com.m2i.tp.appliSpringJpa.entity.Compte;
  */
 
 public interface DaoCompte extends DaoGeneric<Compte,Integer>{
-	//+ méthode de recherche spécifiques aux operations
+	//+ méthode de recherche spécifiques aux comptes
+	List<Compte> findBySoldeMaxi(double soldeMaxi);
 }
 
 
