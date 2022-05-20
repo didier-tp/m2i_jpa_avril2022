@@ -9,12 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="operation")
+@NamedQueries({
+	   @NamedQuery(name = "Operation.findOperationsByCompteNumber",
+	               query = "SELECT o FROM  Operation o WHERE o.compte.numero = ?1 ")
+	})
 public class Operation {
 	
 	@Id

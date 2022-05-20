@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -19,7 +20,9 @@ import javax.persistence.Table;
 @NamedQueries({
    @NamedQuery(name = "Compte.findBySoldeMaxi",query = "SELECT c FROM  Compte c WHERE c.solde < ?1 "),
    @NamedQuery(name = "Compte.findCompteByIdWithOperations",
-               query = "SELECT c FROM  Compte c left join fetch c.operations WHERE c.numero = ?1 ")
+               query = "SELECT c FROM  Compte c left join fetch c.operations WHERE c.numero = ?1 "),
+   @NamedQuery(name = "Compte.findComptesByClientNumber",
+                       query = "SELECT cpt FROM  Compte cpt inner join cpt.clients cli WHERE cli.numero = ?1 ")
 })
 public class Compte {
 	
@@ -44,7 +47,15 @@ public class Compte {
 		this.operations.add(op);
 	}
 	
+	@ManyToMany(fetch = FetchType.LAZY , mappedBy="comptes")
+	private List<Client> clients;
 	
+	public void addClient(Client cli) {
+		if(this.clients==null) {
+			this.clients = new ArrayList<Client>();
+		}
+		this.clients.add(cli);
+	}
 
 
 
@@ -95,6 +106,18 @@ public class Compte {
 
 	public void setOperations(List<Operation> operations) {
 		this.operations = operations;
+	}
+
+
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
 	}
 	
 	

@@ -37,6 +37,13 @@ public class DaoCompteJpa extends DaoGenericJpa<Compte,Integer> implements DaoCo
 				.setParameter(1,  idCompte)
 				.getSingleResult();
 	}
+
+	@Override
+	public List<Compte> findComptesByClientNumber(Integer numClient) {
+		return entityManager.createNamedQuery("Compte.findComptesByClientNumber",Compte.class)
+				.setParameter(1,  numClient)
+				.getResultList();
+	}
 	
     //....
 	

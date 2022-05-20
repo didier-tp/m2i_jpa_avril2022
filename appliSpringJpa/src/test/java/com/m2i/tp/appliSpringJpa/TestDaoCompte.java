@@ -8,8 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.m2i.tp.appliSpringJpa.dao.DaoClient;
 import com.m2i.tp.appliSpringJpa.dao.DaoCompte;
 import com.m2i.tp.appliSpringJpa.dao.DaoOperation;
+import com.m2i.tp.appliSpringJpa.entity.Client;
 import com.m2i.tp.appliSpringJpa.entity.Compte;
 import com.m2i.tp.appliSpringJpa.entity.Operation;
 
@@ -22,6 +24,9 @@ class TestDaoCompte {
 	
 	@Autowired //injection de dépendance via Spring
 	private DaoOperation daoOperation;
+	
+	@Autowired //injection de dépendance via Spring
+	private DaoClient daoClient;
 	
 	@Test
 	void testCompteAvecOperationsV2() {
@@ -57,7 +62,7 @@ class TestDaoCompte {
 		     et mappedBy coté Commpte
 		     
 		     
-		     DaoEmploye à enrichir ou nien DaoClient
+		     DaoEmploye à enrichir ou bien DaoClient
 		     
 		     
 		     */
@@ -69,7 +74,25 @@ class TestDaoCompte {
 		et afficher tous les comptes d'un client ou employe
 		 */
 		
+		Compte compteC1a = daoCompte.insert(new Compte(null, "compteC1a", 120.0));
+		Compte compteC2a = daoCompte.insert(new Compte(null, "compteC2a", 500.0));
+		Compte compteC1b = daoCompte.insert(new Compte(null, "compteC1b", 60.0));
+		Compte compteC2b = daoCompte.insert(new Compte(null, "compteC2b", 12.0));
+		Compte compteCommun = daoCompte.insert(new Compte(null, "compteCommun", 420.0));
 		
+		Client clientA = new Client(null, "prenomCa", "nomCa");
+		Client clientB = new Client(null, "prenomCb", "nomCb");
+		clientA.addCompte(compteC1a); clientA.addCompte(compteC2a); clientA.addCompte(compteCommun);
+		clientB.addCompte(compteC1b); clientB.addCompte(compteC2b); clientB.addCompte(compteCommun);
+		Client clientAEnBase = daoClient.insert(clientA);
+		Client clientBEnBase = daoClient.insert(clientB);
+		
+		System.out.println("comptes rattachées au clientA:" + daoCompte.findComptesByClientNumber(clientAEnBase.getNumero()));
+		System.out.println("comptes rattachées au clientB:" + daoCompte.findComptesByClientNumber(clientBEnBase.getNumero()));
+		
+		System.out.println("clients rattachées au compteC1a:" + daoClient.findClientsByCompteNumber(compteC1a.getNumero()));
+		System.out.println("clients rattachées au compteCommun:" + daoClient.findClientsByCompteNumber(compteCommun.getNumero()));
+	
 	}
 	
 	@Test
@@ -101,7 +124,7 @@ class TestDaoCompte {
 		Compte compteXRelu = daoCompte.findCompteByIdWithOperations(idCptX);
 		System.out.println("compteXRelu: " + compteXRelu);
 		//System.out.println("operations attachées au compteX: " + compteXRelu.getOperations());
-		System.out.println("operations attachées au compteX: ");
+		System.out.println("operations attachées au compteX (via daoCompte): ");
 		for(Operation op : compteXRelu.getOperations()) {
 			System.out.println("\t"+op.toString());
 		}
@@ -111,6 +134,12 @@ class TestDaoCompte {
 		
 		List<Compte> compteAvecPetitsSoldes = daoCompte.findBySoldeMaxi(200.0);
 		System.out.println("compteAvecPetitsSoldes="+compteAvecPetitsSoldes);
+		
+		List<Operation> listeOperationsDuCompteX = daoOperation.findOperationsByCompteNumber(idCptX);
+		System.out.println("operations attachées au compteX (via daoOperation): ");
+		for(Operation op : listeOperationsDuCompteX) {
+			System.out.println("\t"+op.toString());
+		}
 	}
 
 	@Test
