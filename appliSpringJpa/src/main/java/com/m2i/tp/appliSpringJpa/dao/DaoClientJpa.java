@@ -26,5 +26,12 @@ public class DaoClientJpa extends DaoGenericJpa<Client,Integer> implements DaoCl
 				.getResultList();
 	}
 
+	@Override
+	public Client findClientWithComptesByClientNumber(Integer numCli) {
+		return entityManager.createNamedQuery("Client.findClientWithComptesByClientNumber",Client.class)
+				.setParameter(1,  numCli)
+				.getSingleResult();
+	}
+
 	
 }

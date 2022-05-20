@@ -93,6 +93,12 @@ class TestDaoCompte {
 		System.out.println("clients rattachées au compteC1a:" + daoClient.findClientsByCompteNumber(compteC1a.getNumero()));
 		System.out.println("clients rattachées au compteCommun:" + daoClient.findClientsByCompteNumber(compteCommun.getNumero()));
 	
+		Client clientAvecComptes = daoClient.findClientWithComptesByClientNumber(clientAEnBase.getNumero());
+		System.out.println("clientAvecComptes="+clientAvecComptes);
+		for(Compte cpt : clientAvecComptes.getComptes()) {
+			System.out.println("\t"+ cpt);
+		}
+		
 	}
 	
 	@Test

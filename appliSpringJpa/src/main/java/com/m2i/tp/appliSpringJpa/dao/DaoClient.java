@@ -14,6 +14,7 @@ import com.m2i.tp.appliSpringJpa.entity.Operation;
 public interface DaoClient extends DaoGeneric<Client,Integer>{
 	//+ méthode de recherche spécifiques 
 	List<Client> findClientsByCompteNumber(Integer numCompte);
+	Client findClientWithComptesByClientNumber(Integer numCli);
 }
 
 
