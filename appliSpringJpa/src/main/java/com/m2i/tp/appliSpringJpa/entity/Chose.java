@@ -21,7 +21,7 @@ public class Chose {
 	
 	@Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator( name = "uuid", strategy = "org.hibernate.id.UUIDGenerator" )
+    @GenericGenerator( name = "uuid", strategy = "org.hibernate.id.UUIDGenerator"  )
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 	

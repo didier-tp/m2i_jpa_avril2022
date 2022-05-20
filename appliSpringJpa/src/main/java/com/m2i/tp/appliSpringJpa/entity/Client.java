@@ -19,8 +19,10 @@ import javax.persistence.Table;
 @Table(name = "client")
 @NamedQueries({
 	   @NamedQuery(name = "Client.findClientsByCompteNumber",
-	                       query = "SELECT cli FROM  Client cli inner join cli.comptes cpt WHERE cpt.numero = ?1 ")
-	})
+	                       query = "SELECT cli FROM  Client cli inner join cli.comptes cpt WHERE cpt.numero = ?1 "),
+	   @NamedQuery(name = "Client.findComptesByClientNumber",
+                           query = "SELECT cpt FROM  Client cli inner join cli.comptes cpt WHERE cli.numero = ?1 ")
+	}) 
 public class Client {
 	
 	@Id

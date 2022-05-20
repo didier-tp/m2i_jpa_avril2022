@@ -43,6 +43,9 @@ public class DaoCompteJpa extends DaoGenericJpa<Compte,Integer> implements DaoCo
 		return entityManager.createNamedQuery("Compte.findComptesByClientNumber",Compte.class)
 				.setParameter(1,  numClient)
 				.getResultList();
+		/*return entityManager.createNamedQuery("Client.findComptesByClientNumber",Compte.class)
+				.setParameter(1,  numClient)
+				.getResultList();*/
 	}
 	
     //....
