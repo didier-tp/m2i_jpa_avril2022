@@ -1,5 +1,7 @@
 package com.m2i.tp.appliSpringJpa.dao;
 
+import java.util.List;
+
 import com.m2i.tp.appliSpringJpa.entity.Operation;
 
 /*
@@ -10,6 +12,8 @@ import com.m2i.tp.appliSpringJpa.entity.Operation;
 
 public interface DaoOperation extends DaoGeneric<Operation,Integer>{
 	//+ méthode de recherche spécifiques aux comptes
+	List<Operation> findOperationsByCompteNumber(Integer numCompte);
+	//à tester en fin de méthode testCompteAvecOperations sur TestDaoCompte
 }
 
 

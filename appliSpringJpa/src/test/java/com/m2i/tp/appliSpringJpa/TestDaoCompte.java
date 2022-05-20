@@ -24,6 +24,55 @@ class TestDaoCompte {
 	private DaoOperation daoOperation;
 	
 	@Test
+	void testCompteAvecOperationsV2() {
+		Compte compteX = new Compte(null, "compteX", 120.0);
+
+		Operation op1 = new Operation(null, "achat 1x", -55.0 , new Date() ); 
+		Operation op2 = new Operation(null, "achat 2x", -75.0 , new Date() ); 
+		compteX.addOperation(op1);
+		compteX.addOperation(op2);
+		Compte compteXsauvegarde = daoCompte.insert(compteX); //ça ne suffit pas pour sauvegarfer en base
+		                                                      //le lien avec les operations
+		                       //car coté secondaire (là ou myappedBy)
+		System.out.println("compteX sauvegardé:"+compteXsauvegarde);
+		
+		//on sauvegarde les operations (coté principale de la relation bi-directionnelle)
+		//pour que le lien entre compte et operation soit bien sauvegardé en base
+		op1.setCompte(compteXsauvegarde); //quelquefois déjà fait indirecment via addOperation()
+		op1.setCompte(compteXsauvegarde); //quelquefois déjà fait indirecment via addOperation()
+		daoOperation.insert(op1); daoOperation.insert(op2);
+		
+		Compte compteXRelu = daoCompte.findCompteByIdWithOperations(compteXsauvegarde.getNumero());
+		System.out.println("operations attachées au compteX: ");
+		for(Operation op : compteXRelu.getOperations()) {
+			System.out.println("\t"+op.toString());
+		}
+	}
+	
+	@Test
+	void testCompteAvecEmployeOuClient() {
+		/*coder une association @ManyToMany entre Employe et Compte
+		                                    ou bien Client et Compte 
+		     avec @JoinTable du coté Client ou Employe
+		     et mappedBy coté Commpte
+		     
+		     
+		     DaoEmploye à enrichir ou nien DaoClient
+		     
+		     
+		     */
+		/*
+		  Créer quelques comptes
+		 Créer quelques client ou employe,
+		rattache , sauvegarde .
+		relecture en base
+		et afficher tous les comptes d'un client ou employe
+		 */
+		
+		
+	}
+	
+	@Test
 	void testCompteAvecOperations() {
 		Compte compteXStockeEnBase = daoCompte.insert(new Compte(null, "compteX", 120.0));
 		System.out.println("compteXStockeEnBase"+compteXStockeEnBase.toString());
@@ -51,7 +100,11 @@ class TestDaoCompte {
 		//Compte compteXRelu = daoCompte.findById(idCptX); //avec lazyException
 		Compte compteXRelu = daoCompte.findCompteByIdWithOperations(idCptX);
 		System.out.println("compteXRelu: " + compteXRelu);
-		System.out.println("operations attachées au compteX: " + compteXRelu.getOperations());
+		//System.out.println("operations attachées au compteX: " + compteXRelu.getOperations());
+		System.out.println("operations attachées au compteX: ");
+		for(Operation op : compteXRelu.getOperations()) {
+			System.out.println("\t"+op.toString());
+		}
 		
 		Compte compteYRelu = daoCompte.findCompteByIdWithOperations(idCptY);
 		System.out.println("operations attachées au compteY: " + compteYRelu.getOperations());

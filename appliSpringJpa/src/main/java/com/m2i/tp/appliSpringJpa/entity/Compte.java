@@ -40,14 +40,24 @@ public class Compte {
 		if(this.operations==null) {
 			this.operations = new ArrayList<Operation>();
 		}
-		op.setCompte(this);
+		op.setCompte(this);  //liaison cohérente dans les 2 sens
 		this.operations.add(op);
 	}
 	
+	
+
+
+
 	@Override
 	public String toString() {
 		return "Compte [numero=" + numero + ", label=" + label + ", solde=" + solde + "]";
 	}
+
+
+
+
+
+
 
 	public Compte(Integer numero, String label, Double solde) {
 		super();

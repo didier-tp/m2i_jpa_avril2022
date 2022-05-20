@@ -34,12 +34,11 @@ public class Operation {
     private Compte compte;
 
     
-    
+
 	@Override
 	public String toString() {
-		/*return "Operation [numOp=" + numOp + ", label=" + label + ", montant=" + montant + ", dateOp=" + dateOp
-				+ ", compte=" + compte + "]"; */
-		return "Operation [numOp=" + numOp + ", label=" + label + ", montant=" + montant + ", dateOp=" + dateOp + "]";
+		return "Operation [numOp=" + numOp + ", label=" + label + ", montant=" + montant + ", dateOp=" + dateOp
+				+ /* ", compte=" + compte + */ "]";
 	}
 
 
