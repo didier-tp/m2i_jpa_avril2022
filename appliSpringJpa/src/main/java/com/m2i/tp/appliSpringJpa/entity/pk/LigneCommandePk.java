@@ -3,11 +3,15 @@ package com.m2i.tp.appliSpringJpa.entity.pk;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class LigneCommandePk implements Serializable {
+	@Column(name="num_commande")
 	private Integer numCommande;
+	
+	@Column(name="num_ligne")
 	private Integer numLigne;
 	
 	public LigneCommandePk() {

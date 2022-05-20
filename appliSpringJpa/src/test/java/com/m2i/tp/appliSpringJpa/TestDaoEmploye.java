@@ -59,7 +59,7 @@ class TestDaoEmploye {
 		System.out.println("empl1StockeEnBase"+empl1StockeEnBase.toString());
 	}
 	
-	//@Test
+	@Test
 	void testValidationAvecHibernateValidation() {
 		Employe invalidEmp1 = new Employe(null,null,null,"0102030405","jean.BonSansArobasxyz.com","login","p");
 		validateEntity(invalidEmp1);
