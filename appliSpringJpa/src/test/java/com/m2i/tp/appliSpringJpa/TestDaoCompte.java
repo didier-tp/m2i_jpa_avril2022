@@ -48,10 +48,12 @@ class TestDaoCompte {
 		
 		//etape2
 		//on charge le compte et on affiche les operations liées aux compte
-		Compte compteXRelu = daoCompte.findById(idCptX);
+		//Compte compteXRelu = daoCompte.findById(idCptX); //avec lazyException
+		Compte compteXRelu = daoCompte.findCompteByIdWithOperations(idCptX);
+		System.out.println("compteXRelu: " + compteXRelu);
 		System.out.println("operations attachées au compteX: " + compteXRelu.getOperations());
 		
-		Compte compteYRelu = daoCompte.findById(idCptY);
+		Compte compteYRelu = daoCompte.findCompteByIdWithOperations(idCptY);
 		System.out.println("operations attachées au compteY: " + compteYRelu.getOperations());
 		
 		List<Compte> compteAvecPetitsSoldes = daoCompte.findBySoldeMaxi(200.0);

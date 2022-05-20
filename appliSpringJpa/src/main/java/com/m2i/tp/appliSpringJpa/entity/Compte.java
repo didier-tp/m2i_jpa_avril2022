@@ -17,7 +17,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="compte")
 @NamedQueries({
-   @NamedQuery(name = "Compte.findBySoldeMaxi",query = "SELECT c FROM  Compte c WHERE c.solde < ?1 ")
+   @NamedQuery(name = "Compte.findBySoldeMaxi",query = "SELECT c FROM  Compte c WHERE c.solde < ?1 "),
+   @NamedQuery(name = "Compte.findCompteByIdWithOperations",
+               query = "SELECT c FROM  Compte c left join fetch c.operations WHERE c.numero = ?1 ")
 })
 public class Compte {
 	
@@ -30,8 +32,8 @@ public class Compte {
 	
 	private Double solde;
 	
-	//1-n (fetch = FetchType.EAGER déconseillé ou LAZY conseilllé , mappedBy="nom java de la relation inverse")
-	@OneToMany(fetch = FetchType.EAGER , mappedBy="compte")
+	//1-n (fetch = FetchType.EAGER déconseillé ou LAZY conseillé , mappedBy="nom java de la relation inverse")
+	@OneToMany(fetch = FetchType.LAZY , mappedBy="compte")
 	private List<Operation> operations;
 	
 	public void addOperation(Operation op) {

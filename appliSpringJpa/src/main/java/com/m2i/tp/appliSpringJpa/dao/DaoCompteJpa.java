@@ -30,6 +30,13 @@ public class DaoCompteJpa extends DaoGenericJpa<Compte,Integer> implements DaoCo
 				.setParameter(1, soldeMaxi)
 				.getResultList();
 	}
+
+	@Override
+	public Compte findCompteByIdWithOperations(Integer idCompte) {
+		return entityManager.createNamedQuery("Compte.findCompteByIdWithOperations",Compte.class)
+				.setParameter(1,  idCompte)
+				.getSingleResult();
+	}
 	
     //....
 	
